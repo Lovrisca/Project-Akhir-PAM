@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F4F4F4"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -48,7 +48,7 @@
                 android:id="@+id/loginText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="LOGIN"
+                android:text="REGISTER"
                 android:fontFamily="@font/inriasans_bold"
                 android:textAlignment="center"
                 android:textColor="@color/black1"
@@ -87,7 +87,6 @@
                 android:textColor="@color/black1"
                 android:textSize="13sp"
                 tools:ignore="MissingConstraints" />
-
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="220dp"
@@ -96,7 +95,7 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/inriasans_bold"
                 android:background="@drawable/bg_button"
-                android:text="LOGIN"
+                android:text="REGISTER"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -111,16 +110,16 @@
                     android:id="@+id/account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Don’t have an account? "
+                    android:text="Have an account? "
                     android:fontFamily="@font/inriasans_regular"
                     android:textColor="@color/black1"
                     android:textSize="13sp"
                     tools:ignore="MissingConstraints" />
                 <TextView
-                    android:id="@+id/register_now"
+                    android:id="@+id/login_now"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/registerNow"
+                    android:text="@string/loginNow"
                     android:textColor="@color/black1"
                     android:fontFamily="@font/inriasans_regular"
                     android:textSize="13sp"
