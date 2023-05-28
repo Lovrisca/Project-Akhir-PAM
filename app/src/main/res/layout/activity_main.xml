@@ -12,6 +12,7 @@
         android:background="@drawable/ic_gradient_bg" />
 
     <Button
+        android:id="@+id/buttonStart"
         android:layout_width="230dp"
         android:layout_height="48dp"
         android:layout_marginBottom="70dp"
