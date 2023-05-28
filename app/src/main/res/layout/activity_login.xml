@@ -60,7 +60,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:drawablePadding="8dp"
-                android:hint="Email"
+                android:hint="Email Address"
                 android:padding="8dp"
                 android:fontFamily="@font/inriasans_regular"
                 android:textColor="@color/black1"
