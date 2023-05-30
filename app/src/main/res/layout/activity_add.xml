@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#F4F4F4"
+    android:orientation="vertical"
     tools:context=".AddActivity">
 
     <RelativeLayout
@@ -27,9 +27,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="120dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/rectangle_5"
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp"
@@ -44,12 +44,13 @@
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="24dp">
+
             <TextView
                 android:id="@+id/loginText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="UPLOAD DATA"
                 android:fontFamily="@font/inriasans_bold"
+                android:text="UPLOAD DATA"
                 android:textAlignment="center"
                 android:textColor="@color/black1"
                 android:textSize="24sp"
@@ -62,41 +63,45 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/imageUpload"
+                android:src="@drawable/image_upload"
                 tools:ignore="SpeakableTextPresentCheck" />
+
             <EditText
                 android:id="@+id/add_title"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="30dp"
                 android:drawablePadding="8dp"
+                android:fontFamily="@font/inriasans_regular"
                 android:hint="Title"
                 android:padding="8dp"
-                android:fontFamily="@font/inriasans_regular"
                 android:textColor="@color/black1"
                 android:textColorHighlight="@color/silver" />
+
             <EditText
                 android:id="@+id/add_author"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="10dp"
                 android:drawablePadding="8dp"
-                android:hint="Author"
                 android:fontFamily="@font/inriasans_regular"
+                android:hint="Author"
                 android:padding="8dp"
                 android:textColor="@color/black1"
                 android:textColorHighlight="@color/silver" />
+
             <EditText
                 android:id="@+id/add_desc"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="10dp"
                 android:drawablePadding="8dp"
-                android:hint="Description"
                 android:fontFamily="@font/inriasans_regular"
+                android:hint="Description"
                 android:padding="8dp"
                 android:textColor="@color/black1"
                 android:textColorHighlight="@color/silver" />
+
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="220dp"
@@ -104,20 +109,21 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:fontFamily="@font/inriasans_bold"
                 android:background="@drawable/bg_button"
+                android:fontFamily="@font/inriasans_bold"
                 android:text="SAVE"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
+
             <Button
                 android:id="@+id/btn_logout"
                 android:layout_width="220dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
-                android:fontFamily="@font/inriasans_bold"
                 android:background="@drawable/bg_button"
+                android:fontFamily="@font/inriasans_bold"
                 android:text="LOGOUT"
                 android:textAllCaps="true"
                 android:textColor="@color/white"

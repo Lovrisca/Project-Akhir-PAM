@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#F4F4F4"
+    android:orientation="vertical"
     tools:context=".RegisterActivity">
 
     <RelativeLayout
@@ -27,9 +27,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="150dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/rectangle_5"
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp"
@@ -44,84 +44,93 @@
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="24dp">
+
             <TextView
                 android:id="@+id/loginText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="REGISTER"
                 android:fontFamily="@font/inriasans_bold"
+                android:text="REGISTER"
                 android:textAlignment="center"
                 android:textColor="@color/black1"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:drawablePadding="8dp"
+                android:fontFamily="@font/inriasans_regular"
                 android:hint="Email Address"
                 android:padding="8dp"
-                android:fontFamily="@font/inriasans_regular"
                 android:textColor="@color/black1"
                 android:textColorHighlight="@color/silver" />
+
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="10dp"
                 android:drawablePadding="8dp"
-                android:hint="Password"
                 android:fontFamily="@font/inriasans_regular"
+                android:hint="Password"
+                android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black1"
                 android:textColorHighlight="@color/silver" />
+
             <TextView
                 android:id="@+id/forgot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginTop="3dp"
-                android:text="Forgot Password?"
                 android:fontFamily="@font/inriasans_regular"
+                android:text="Forgot Password?"
                 android:textColor="@color/black1"
                 android:textSize="13sp"
                 tools:ignore="MissingConstraints" />
+
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="220dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/inriasans_bold"
                 android:background="@drawable/bg_button"
+                android:fontFamily="@font/inriasans_bold"
                 android:text="REGISTER"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
+
             <LinearLayout
                 android:id="@+id/dontHaveAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_gravity="center"
                 android:layout_marginTop="25dp"
-                android:layout_gravity="center">
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Have an account? "
                     android:fontFamily="@font/inriasans_regular"
+                    android:text="Have an account? "
                     android:textColor="@color/black1"
                     android:textSize="13sp"
                     tools:ignore="MissingConstraints" />
+
                 <TextView
                     android:id="@+id/login_now"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inriasans_regular"
                     android:text="@string/loginNow"
                     android:textColor="@color/black1"
-                    android:fontFamily="@font/inriasans_regular"
                     android:textSize="13sp"
                     tools:ignore="MissingConstraints" />
             </LinearLayout>
@@ -132,29 +141,31 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:orientation="horizontal">
+
                 <ImageButton
                     android:id="@+id/btn_gmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gmail"
                     android:layout_marginRight="10dp"
                     android:background="@android:color/transparent"
+                    android:src="@drawable/gmail"
                     tools:ignore="SpeakableTextPresentCheck" />
+
                 <ImageButton
                     android:id="@+id/btn_fb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/facebook"
                     android:layout_marginRight="10dp"
                     android:background="@android:color/transparent"
+                    android:src="@drawable/facebook"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/btn_twt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/twitter"
                     android:background="@android:color/transparent"
+                    android:src="@drawable/twitter"
                     tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
         </LinearLayout>

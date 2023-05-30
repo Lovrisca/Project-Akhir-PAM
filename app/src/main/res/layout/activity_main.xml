@@ -17,8 +17,8 @@
         android:layout_height="48dp"
         android:layout_marginBottom="70dp"
         android:background="@drawable/ic_button1_bg"
-        android:text="Get Start"
         android:fontFamily="@font/inriasans_regular"
+        android:text="Get Start"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
