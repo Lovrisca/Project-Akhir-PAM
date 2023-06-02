@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inriasans_bold"
-                android:text="UPLOAD DATA"
+                android:text="UPDATE DATA"
                 android:textAlignment="center"
                 android:textColor="@color/black1"
                 android:textSize="24sp"

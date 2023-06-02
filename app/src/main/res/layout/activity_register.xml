@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/rectangle_5"
         app:cardCornerRadius="30dp"
@@ -80,7 +80,18 @@
                 android:padding="8dp"
                 android:textColor="@color/black1"
                 android:textColorHighlight="@color/silver" />
-
+            <EditText
+                android:id="@+id/et_confirmPass"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inriasans_regular"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="@color/black1"
+                android:textColorHighlight="@color/silver" />
             <TextView
                 android:id="@+id/forgot"
                 android:layout_width="wrap_content"
@@ -153,7 +164,7 @@
 
                 <ImageButton
                     android:id="@+id/btn_fb"
-                    android:layout_width="wrap_content"
+                    android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:background="@android:color/transparent"
