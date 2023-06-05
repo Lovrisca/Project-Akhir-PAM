@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/contact_layout"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/bg_rectangle_item"
+        android:orientation="horizontal"
+        android:layout_margin="18dp"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/tv_gambar"
+            android:background="@drawable/foto_contoh"
+            android:layout_width="110dp"
+            android:layout_height="110dp"/>
+
+        <LinearLayout
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_judul"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Anggota K-RISMA Menjadi MAWAPRES UTAMA FILKOM 2019"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+            <TextView
+                android:id="@+id/tv_tanggal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:text="28 may 2023"
+                android:textColor="@color/silver"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="110dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/btn_delete"
+                android:background="@drawable/ic_delete"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="25dp"/>
+
+            <ImageView
+                android:id="@+id/btn_edit"
+                android:background="@drawable/ic_pencil"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="25dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_left_arrow" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/judul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anggota K-RISMA Menjadi MAWAPRES UTAMA FILKOM 2019"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/penulis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meida Dela - KNews"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/tanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="28 Mei 2023"
+            android:textSize="10sp"
+            android:textColor="@color/silver"
+            android:paddingTop="5dp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/foto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/foto_contoh"
+            android:paddingTop="10dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pemilihan Mahasiswa Berprestasi (MAWAPRES) adalah agenda tahunan yang diselenggarakan oleh Kementerian Riset, Teknologi, dan Pendidikan Tinggi (KEMENRISTEKDIKTI). Universitas Brawijaya setiap tahunnya mengadakan pemilihan MAWAPRES yang delegasinya berasal dari setiap fakultas. Setiap fakultas melakukan pemilihan untuk menentukan MAWAPRES utamanya. Tahun ini, FILKOM memiliki 10 kandidat yang akan memperebutkan gelar MAWAPRES Utama FILKOM. MAWAPRES Utama FILKOM akan mewakili fakultas ke ajang pemilihan MAWAPRES tingkat universitas.
+        \n\n Pemilihan MAWAPRES FILKOM diselenggarakan oleh Badan Eksekutif Mahasiswa (BEM) FILKOM. Pada tahun 2019, Terdapat dua kandidat yang merupakan anggota K-RISMA. Kedua kandidat tersebut adalah Diva Fardiana Risa (TIF’16) dan Muhammad Syarifuddin (PTI’17). Setelah melalui beberapa tahapan seleksi, presentasi final dilakukan pada hari Senin, 28 Januari 2019 di Gedung F Lt. 1. "
+            android:textSize="10sp"
+            android:paddingTop="15dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
