@@ -64,6 +64,7 @@
                 android:layout_marginTop="40dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/image_upload"
+                android:onClick="uploadImage"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <EditText
@@ -103,7 +104,7 @@
                 android:textColorHighlight="@color/silver" />
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_save"
                 android:layout_width="220dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
