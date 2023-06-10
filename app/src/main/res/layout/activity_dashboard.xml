@@ -5,31 +5,48 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/gambar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-40dp"
+            android:src="@drawable/gambar2" />
+    </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_button"
-            android:fontFamily="@font/inriasans_bold"
-            android:text="Logout"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TouchTargetSizeCheck" />
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/search_bg"
+            android:inputType="text"
+            android:drawableEnd="@drawable/ic_search"
+            android:drawablePadding="16dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:hint="Search"
+            android:textColor="@color/black1"
+            android:textColorHint="@color/search"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -40,6 +57,7 @@
         android:layout_height="0dp"
         android:nestedScrollingEnabled="false"
         android:paddingBottom="10dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/topbar"
         tools:itemCount="5"
         tools:listitem="@layout/dashboard_item" />
