@@ -150,6 +150,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else password.setError(null);
         return result;
     }
+
     public void updateUI(FirebaseUser user) {
         if (user != null) {
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
