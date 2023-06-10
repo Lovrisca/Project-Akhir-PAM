@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -36,9 +37,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText email, password;
+    private EditText email, password, confirmpass, name;
     private Button btnRegister;
     private TextView loginNow;
     private ImageButton google;
@@ -47,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     GoogleSignInClient googleSignInClient;
     int RC_SIGN_IN = 20;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnRegister = findViewById(R.id.btn_register);
         loginNow = findViewById(R.id.login_now);
         google = findViewById(R.id.btn_gmail);
+        confirmpass = findViewById(R.id.et_confirmPass);
+        name = findViewById(R.id.et_name);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -152,15 +157,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private boolean validateForm() {
         boolean result = true;
+        if(TextUtils.isEmpty(name.getText().toString())) {
+            name.setError("Required");
+            result = false;
+        } else name.setError(null);
+
         if (TextUtils.isEmpty(email.getText().toString())) {
             email.setError("Required");
             result = false;
+        } else if(!isValidEmail(email.getText().toString())) {
+            email.setError("Invalid Email");
+            result = false;
         } else email.setError(null);
+
         if (TextUtils.isEmpty(password.getText().toString())) {
             password.setError("Required");
             result = false;
+        } else if (password.length() < 8 ) {
+            password.setError("Password should be at least 8 character long");
+            result = false;
         } else password.setError(null);
+
+        if (TextUtils.isEmpty(confirmpass.getText().toString())){
+            confirmpass.setError("Required");
+            result = false;
+        } else if (!confirmpass.getText().toString().equals(password.getText().toString())) {
+            confirmpass.setError("Password do not match");
+            result = false;
+        } else confirmpass.setError(null);
+
         return result;
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        return email.matches(emailPattern);
     }
 
     public void updateUI(FirebaseUser user) {
