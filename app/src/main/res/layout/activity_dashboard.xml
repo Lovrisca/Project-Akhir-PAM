@@ -51,7 +51,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_news"
         android:layout_width="match_parent"
@@ -66,9 +65,12 @@
     <ImageView
         android:id="@+id/navbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_navbar"
-        />
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_navbar"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 <!--    <ImageView-->
 <!--        android:id="@+id/btn_create"-->
