@@ -43,6 +43,7 @@
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:hint="Search"
+            android:textCursorDrawable="@null"
             android:textColor="@color/black1"
             android:textColorHint="@color/search"
             />
@@ -63,15 +64,22 @@
         tools:listitem="@layout/dashboard_item" />
 
     <ImageView
-        android:id="@+id/btn_create"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="36dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_create"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/navbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_navbar"
+        />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/btn_create"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:layout_marginBottom="36dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:src="@drawable/ic_create"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.073"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
