@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1000084332129",
+    "firebase_url": "https://tugasakhir-44691-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tugasakhir-44691",
+    "storage_bucket": "tugasakhir-44691.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000084332129:android:a829045b51c92771311420",
+        "android_client_info": {
+          "package_name": "com.example.demofirebasetorecycler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000084332129-kf61l25j4tdm84qss3bd807nt9ukmnv9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVzQu0Xef2XJh7h1Yyg6TiQ4l89ZuQ-Iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1000084332129-kf61l25j4tdm84qss3bd807nt9ukmnv9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000084332129:android:92bbe91dba6e6073311420",
+        "android_client_info": {
+          "package_name": "com.example.project_akhir_pam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000084332129-kf61l25j4tdm84qss3bd807nt9ukmnv9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVzQu0Xef2XJh7h1Yyg6TiQ4l89ZuQ-Iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1000084332129-kf61l25j4tdm84qss3bd807nt9ukmnv9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
