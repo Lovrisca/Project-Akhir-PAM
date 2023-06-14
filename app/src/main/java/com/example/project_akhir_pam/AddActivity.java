@@ -29,7 +29,6 @@ public class AddActivity extends AppCompatActivity{
     private
     Button btnSave;
     private FirebaseAuth mAuth;
-    private DatabaseReference databaseReference;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
 

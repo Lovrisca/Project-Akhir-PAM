@@ -23,12 +23,11 @@ public class DashboardActivity extends AppCompatActivity {
     RecyclerView rc;
     DashboardAdapter adapter;
     ImageView add, home, profile;
-    EditText search;
+    Boolean isProfileRunning = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         setTitle("Search");
 
         rc = (RecyclerView) findViewById(R.id.recycle_news);
@@ -45,10 +44,29 @@ public class DashboardActivity extends AppCompatActivity {
         add = findViewById(R.id.btn_add);
         home = findViewById(R.id.btn_home);
         profile = findViewById(R.id.btn_profile);
+
+        //to add activity Intent
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),AddActivity.class));
+            }
+        });
+
+        //to profile activity Intent
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isProfileRunning = true;
+                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isProfileRunning) {
+                    finish();
+                }
             }
         });
     }
