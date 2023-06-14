@@ -1,5 +1,6 @@
 package com.example.project_akhir_pam;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,13 +10,21 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
-import java.util.UUID;
-
-public class AddActivity extends AppCompatActivity implements View.OnClickListener{
-    Button btnLogout;
+public class AddActivity extends AppCompatActivity{
     private EditText title, author, desc;
     private
     Button btnSave;
@@ -30,27 +39,49 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_add);
 
         mAuth = FirebaseAuth.getInstance();
-        btnLogout = findViewById(R.id.btn_logout);
-        //databaseReference = DatabaseReference.getInstance().getReference();
         title = findViewById(R.id.add_title);
         author = findViewById(R.id.add_author);
         desc = findViewById(R.id.add_desc);
-        btnLogout.setOnClickListener(this);
         btnSave = findViewById(R.id.btn_save);
-        btnSave.setOnClickListener(this);
-    }
-    public void logOut(){
-        mAuth.signOut();
-        Intent intent = new Intent(AddActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
-        startActivity(intent);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addData();
+            }
+        });
     }
 
-    public void uploadImage(View view) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Pilih Gambar"), PICK_IMAGE_REQUEST);
+    private void addData() {
+        if (!validateForm()) {
+            return;
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("title", title.getText().toString());
+        map.put("author",mAuth.getUid());
+        map.put("description", desc.getText().toString());
+        map.put("date", getCurrentDate());
+        FirebaseDatabase.getInstance().getReference().child("news").push()
+                .setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        title.setText("");
+                        desc.setText("");
+                        Toast.makeText(getApplicationContext(), "Inserted Successfully", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Could not insert", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    //helper
+    public static String getCurrentDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
     private boolean validateForm() {
@@ -61,13 +92,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         } else {
             title.setError(null);
         }
-        if (TextUtils.isEmpty(author.getText().toString())) {
-            author.setError("Required");
-            result = false;
-        } else {
-            author.setError(null);
-        }
-        if(TextUtils.isEmpty(desc.getText().toString())) {
+        if (TextUtils.isEmpty(desc.getText().toString())) {
             desc.setError("Required");
             result = false;
         } else {
@@ -75,6 +100,14 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         }
         return result;
     }
+}
+
+//    public void uploadImage(View view) {
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(Intent.createChooser(intent, "Pilih Gambar"), PICK_IMAGE_REQUEST);
+//    }
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
@@ -103,14 +136,3 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 //                    });
 //        }
 //    }
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_save:
-//                uploadToFirebase();
-            case R.id.btn_logout:
-                logOut();
-                break;
-        }
-    }
-}

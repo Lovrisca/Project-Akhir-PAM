@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="5dp"
+    android:layout_marginHorizontal="10dp"
+    app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@drawable/bg_rectangle_item"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="18dp"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,20 +22,22 @@
             android:id="@+id/img"
             android:background="@drawable/foto_contoh"
             android:layout_width="110dp"
-            android:layout_height="110dp"/>
+            android:layout_height="110dp"
+            android:layout_weight="0"/>
 
         <LinearLayout
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
                 android:text="Anggota K-RISMA Menjadi MAWAPRES UTAMA FILKOM 2019"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -51,10 +54,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="30dp"
-            android:layout_height="110dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="0">
             <ImageView
                 android:id="@+id/btn_delete"
                 android:background="@drawable/ic_delete"
@@ -68,8 +71,6 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="25dp" />
-
         </LinearLayout>
     </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
