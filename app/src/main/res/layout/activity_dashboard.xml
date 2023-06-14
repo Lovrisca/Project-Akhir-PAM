@@ -2,8 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -21,47 +20,42 @@
             android:src="@drawable/gambar2" />
     </RelativeLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/topbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <EditText
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/search_bg"
-            android:inputType="text"
-            android:drawableEnd="@drawable/ic_search"
-            android:drawablePadding="16dp"
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp"
-            android:hint="Search"
-            android:textCursorDrawable="@null"
-            android:textColor="@color/black1"
-            android:textColorHint="@color/search"
-            />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <EditText-->
+<!--            android:id="@+id/search_bar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@drawable/search_bg"-->
+<!--            android:inputType="text"-->
+<!--            android:drawableEnd="@drawable/ic_search"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:paddingRight="20dp"-->
+<!--            android:paddingLeft="20dp"-->
+<!--            android:hint="Search"-->
+<!--            android:textCursorDrawable="@null"-->
+<!--            android:textColor="@color/black1"-->
+<!--            android:textColorHint="@color/search"-->
+<!--            />-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_news"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
         android:nestedScrollingEnabled="false"
-        android:paddingBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -95,16 +89,4 @@
             android:background="@drawable/ic_person"
             android:elevation="10dp" />
     </LinearLayout>
-<!--    <ImageView-->
-<!--        android:id="@+id/btn_create"-->
-<!--        android:layout_width="70dp"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginBottom="36dp"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:src="@drawable/ic_create"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.073"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

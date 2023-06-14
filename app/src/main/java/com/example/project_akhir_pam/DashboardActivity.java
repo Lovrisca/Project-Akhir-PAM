@@ -24,7 +24,6 @@ public class DashboardActivity extends AppCompatActivity {
     DashboardAdapter adapter;
     ImageView add, home, profile;
     EditText search;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
