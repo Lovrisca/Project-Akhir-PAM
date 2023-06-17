@@ -60,7 +60,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 isProfileRunning = true;
-                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                startActivity(new Intent(getApplicationContext(),profile.class));
             }
         });
         home.setOnClickListener(new View.OnClickListener() {

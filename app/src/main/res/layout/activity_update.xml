@@ -66,38 +66,51 @@
                 android:src="@drawable/image_upload"
                 tools:ignore="SpeakableTextPresentCheck" />
 
+            <TextView
+                android:layout_marginTop="40dp"
+                android:id="@+id/titleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inriasans_bold"
+                android:text="Title"
+                android:textAlignment="center"
+                android:textColor="@color/black1"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/et_title"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="30dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="4dp"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/inriasans_regular"
-                android:hint="Title"
+                android:gravity="center"
+                android:hint="Old Title"
                 android:padding="8dp"
                 android:textColor="@color/black1"
                 android:textColorHighlight="@color/silver" />
 
-            <EditText
-                android:id="@+id/add_author"
+            <TextView
+                android:id="@+id/descText"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/inriasans_regular"
-                android:hint="Author"
-                android:padding="8dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inriasans_bold"
+                android:text="Description"
+                android:textAlignment="center"
                 android:textColor="@color/black1"
-                android:textColorHighlight="@color/silver" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/et_desc"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="36dp"
                 android:layout_marginTop="10dp"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/inriasans_regular"
-                android:hint="Description"
+                android:gravity="center"
+                android:hint="Old Description"
                 android:padding="8dp"
                 android:textColor="@color/black1"
                 android:textColorHighlight="@color/silver" />
@@ -107,7 +120,7 @@
                 android:layout_width="220dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/bg_button"
                 android:fontFamily="@font/inriasans_bold"
@@ -116,18 +129,6 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="220dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/bg_button"
-                android:fontFamily="@font/inriasans_bold"
-                android:text="LOGOUT"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
