@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile"
+    tools:context=".ProfileActivity"
     android:background="#90DEFC">
 
     <RelativeLayout
@@ -22,6 +22,34 @@
             android:layout_marginTop="-40dp"
             android:src="@drawable/gambar2" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/bg"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inriasans_light"
+            android:text="Hello,"
+            android:textColor="@color/black"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inriasans_regular"
+            android:text="Username!"
+            android:textColor="@color/black"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/bg"
@@ -45,7 +73,6 @@
         android:textStyle="bold"
         android:layout_marginTop="25dp"
         android:textColor="@color/black"
-
         app:layout_constraintTop_toTopOf="@+id/bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

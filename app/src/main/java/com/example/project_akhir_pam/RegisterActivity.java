@@ -145,6 +145,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void loginNow() {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void signUp(String username, String email, String password) {
@@ -156,16 +157,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 Map<String, Object> details = new HashMap<>();
                 details.put("username", username);
                 details.put("email", email);
-                details.put("since", getCurrentDate());
+                details.put("created", getCurrentDate());
                 databasereference.child("users").child(mAuth.getUid()).setValue(details);
 
                 Log.d(TAG, "createUserWithEmail:success");
                 FirebaseUser user = mAuth.getCurrentUser();
+                Toast.makeText(RegisterActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
                 updateUI(user);
-                Toast.makeText(RegisterActivity.this, user.toString(), Toast.LENGTH_SHORT).show();
             } else {
                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                Toast.makeText(RegisterActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Email has been used", Toast.LENGTH_SHORT).show();
                 updateUI(null);
             }
         });
@@ -215,6 +216,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
-        } else Toast.makeText(RegisterActivity.this, "Log In First", Toast.LENGTH_SHORT).show();
+        }
+        //else Toast.makeText(RegisterActivity.this, "Log In First", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -1,8 +1,5 @@
 package com.example.project_akhir_pam;
 
-import static com.example.project_akhir_pam.DashboardAdapter.getCurrentDate;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,30 +9,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.ViewHolder;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class DashboardActivity extends AppCompatActivity {
 
     RecyclerView rc;
     DashboardAdapter adapter;
     ImageView add, home, profile;
-    Boolean isProfileRunning = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,17 +52,17 @@ public class DashboardActivity extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isProfileRunning = true;
-                startActivity(new Intent(getApplicationContext(),profile.class));
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 finish();
             }
         });
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isProfileRunning) {
-                    finish();
-                }
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
             }
         });
     }
@@ -88,13 +72,11 @@ public class DashboardActivity extends AppCompatActivity {
         super.onStart();
         adapter.startListening();
     }
-
     @Override
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -130,5 +112,11 @@ public class DashboardActivity extends AppCompatActivity {
         adapter=new DashboardAdapter(options);
         adapter.startListening();
         rc.setAdapter(adapter);
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

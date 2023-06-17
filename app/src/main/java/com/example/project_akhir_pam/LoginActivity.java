@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void register() {
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void googleSignIn() {
@@ -129,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (task.isSuccessful()) {
                 Log.d(TAG, "signInWithEmail:success");
                 FirebaseUser user = mAuth.getCurrentUser();
-                Toast.makeText(LoginActivity.this, user.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
                 updateUI(user);
             } else {
                 Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -155,6 +156,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (user != null) {
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
-        } else Toast.makeText(LoginActivity.this,"Log In First", Toast.LENGTH_SHORT).show();
+        }
+        //else Toast.makeText(LoginActivity.this,"Log In First", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -19,7 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class NewsDetails extends AppCompatActivity {
     TextView title, date, author, description;
-    ImageView back;
     DatabaseReference databaseReference, databaseReferenceId;
 
     @Override
@@ -31,7 +30,6 @@ public class NewsDetails extends AppCompatActivity {
         author = findViewById(R.id.tv_author);
         date = findViewById(R.id.tv_date);
         description = findViewById(R.id.tv_details);
-        back = findViewById(R.id.btn_back);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("news");
         databaseReferenceId = FirebaseDatabase.getInstance().getReference().child("users");
 
