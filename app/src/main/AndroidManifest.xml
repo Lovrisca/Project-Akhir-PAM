@@ -19,11 +19,7 @@
         <activity
             android:name=".NewsDetails"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".DashboardAdapter"
             android:exported="false" />
