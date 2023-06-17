@@ -37,7 +37,11 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -147,9 +151,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (task.isSuccessful()) {
 
                 //add realtime db to record username + email
-                Map<String, Object> uname = new HashMap<>();
-                uname.put("username", username);
-                databasereference.child("users").child(mAuth.getUid()).setValue(uname);
+                Map<String, Object> details = new HashMap<>();
+                details.put("username", username);
+                details.put("email", email);
+                details.put("since", getCurrentDate());
+                databasereference.child("users").child(mAuth.getUid()).setValue(details);
 
                 Log.d(TAG, "createUserWithEmail:success");
                 FirebaseUser user = mAuth.getCurrentUser();
@@ -207,5 +213,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
         } else Toast.makeText(RegisterActivity.this, "Log In First", Toast.LENGTH_SHORT).show();
+    }
+
+    public static String getCurrentDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }
