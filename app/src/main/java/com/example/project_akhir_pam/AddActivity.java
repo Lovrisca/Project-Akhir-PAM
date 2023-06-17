@@ -1,5 +1,7 @@
 package com.example.project_akhir_pam;
 
+import static com.example.project_akhir_pam.DashboardAdapter.getCurrentDate;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,11 +27,9 @@ import java.util.Locale;
 import java.util.Map;
 
 public class AddActivity extends AppCompatActivity{
-    private EditText title, desc;
-    private Button btnSave;
-    private FirebaseAuth mAuth;
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private Uri imageUri;
+    EditText title, desc;
+    Button btnSave;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class AddActivity extends AppCompatActivity{
     }
 
     private void addData() {
-        if (!validateForm()) {
+        if (!validateFormAdd()) {
             return;
         }
         Map<String, Object> map = new HashMap<>();
@@ -63,7 +63,8 @@ public class AddActivity extends AppCompatActivity{
                     public void onSuccess(Void aVoid) {
                         title.setText("");
                         desc.setText("");
-                        Toast.makeText(getApplicationContext(), "Inserted Successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Published", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -73,15 +74,13 @@ public class AddActivity extends AppCompatActivity{
                     }
                 });
     }
-
-    //helper
-    public static String getCurrentDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
+        finish();
     }
 
-    private boolean validateForm() {
+    //helper
+    private boolean validateFormAdd() {
         boolean result = true;
         if (TextUtils.isEmpty(title.getText().toString())) {
             title.setError("Required");
@@ -97,6 +96,7 @@ public class AddActivity extends AppCompatActivity{
         }
         return result;
     }
+
 }
 
 //    public void uploadImage(View view) {

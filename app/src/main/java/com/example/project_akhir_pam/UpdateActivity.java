@@ -1,5 +1,7 @@
 package com.example.project_akhir_pam;
 
+import static com.example.project_akhir_pam.DashboardAdapter.getCurrentDate;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,9 +59,7 @@ public class UpdateActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Log.e("data di intent read", id);
-                    String authorValue = dataSnapshot.child("author").getValue(String.class);
                     String titleValue = dataSnapshot.child("title").getValue(String.class);
-                    String dateValue = dataSnapshot.child("date").getValue(String.class);
                     String descValue = dataSnapshot.child("description").getValue(String.class);
                     title.setText(titleValue);
                     description.setText(descValue);
@@ -75,17 +75,18 @@ public class UpdateActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!validateForm()) {
+                if (!validateFormUpdate()) {
                     return;
                 }
                 Map<String, Object> map = new HashMap<>();
                 map.put("title", title.getText().toString());
                 map.put("description", description.getText().toString());
-                map.put("date", getCurrentDate()+"-updated");
+                map.put("date",getCurrentDate()+"-updated");
                 databaseReference.child(id).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(UpdateActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -99,13 +100,7 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     //helper
-    public static String getCurrentDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
-
-    private boolean validateForm() {
+    private boolean validateFormUpdate() {
         boolean result = true;
         if (TextUtils.isEmpty(title.getText().toString())) {
             title.setError("Required");

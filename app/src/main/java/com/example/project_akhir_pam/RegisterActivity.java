@@ -2,6 +2,8 @@ package com.example.project_akhir_pam;
 
 import static android.content.ContentValues.TAG;
 
+import static com.example.project_akhir_pam.DashboardAdapter.getCurrentDate;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -212,12 +214,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (user != null) {
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         } else Toast.makeText(RegisterActivity.this, "Log In First", Toast.LENGTH_SHORT).show();
-    }
-
-    public static String getCurrentDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
     }
 }
