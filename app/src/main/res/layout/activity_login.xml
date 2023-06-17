@@ -64,6 +64,7 @@
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/inriasans_regular"
                 android:hint="Email Address"
+                android:inputType="textEmailAddress"
                 android:padding="8dp"
                 android:textColor="@color/black1"
                 android:textColorHighlight="@color/silver" />

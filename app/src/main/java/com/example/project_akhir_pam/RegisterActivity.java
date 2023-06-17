@@ -147,8 +147,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (task.isSuccessful()) {
 
                 //add realtime db to record username + email
-                databasereference.child("users").push().setValue(mAuth.getUid());
-                databasereference.child("users").child(mAuth.getUid()).push().setValue(username);
+                Map<String, Object> uname = new HashMap<>();
+                uname.put("username", username);
+                databasereference.child("users").child(mAuth.getUid()).push().setValue(uname);
 
                 Log.d(TAG, "createUserWithEmail:success");
                 FirebaseUser user = mAuth.getCurrentUser();
