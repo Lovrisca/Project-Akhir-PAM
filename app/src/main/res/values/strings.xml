@@ -3,4 +3,6 @@
     <string name="login">LOGIN</string>
     <string name="registerNow"><u>Register Now</u></string>
     <string name="loginNow"><u>Login Now</u></string>
+    <string name="kabar">KABAR</string>
+    <string name="filkom">FILKOM</string>
 </resources>
