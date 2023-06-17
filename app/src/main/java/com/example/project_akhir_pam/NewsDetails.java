@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class NewsDetails extends AppCompatActivity {
     TextView title, date, author, description;
     ImageView back;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference, databaseReferenceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,8 @@ public class NewsDetails extends AppCompatActivity {
         description = findViewById(R.id.tv_details);
         back = findViewById(R.id.btn_back);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("news");
+        databaseReferenceId = FirebaseDatabase.getInstance().getReference().child("users");
+
 
         //get selected news id from adapter
         Intent intent = getIntent();
@@ -43,19 +46,33 @@ public class NewsDetails extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Log.e("data di intent read", id);
-                    String authorValue = dataSnapshot.child("author").getValue(String.class);
+                    String getId = dataSnapshot.child("author").getValue(String.class);
                     String titleValue = dataSnapshot.child("title").getValue(String.class);
                     String dateValue = dataSnapshot.child("date").getValue(String.class);
                     String descValue = dataSnapshot.child("description").getValue(String.class);
                     title.setText(titleValue);
-                    author.setText(authorValue);
                     date.setText(dateValue);
                     description.setText(descValue);
+
+                    //get username from author uid
+                    DatabaseReference authorId = databaseReferenceId.child(getId);
+                    Log.e("data di intent read", getId);
+                    authorId.addValueEventListener(new ValueEventListener() {
+                                                      @Override
+                                                      public void onDataChange(DataSnapshot dataSnapshot) {
+                                                          if (dataSnapshot.exists()) {
+                                                              String authorValue = dataSnapshot.child("username").getValue(String.class);
+                                                              author.setText(authorValue);
+                                                          }
+                                                      }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
                 } else {
                     Toast.makeText(NewsDetails.this, "Not Found", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(NewsDetails.this, "databse error", Toast.LENGTH_SHORT).show();
