@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +30,7 @@ import java.util.Map;
 
 
 public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdapter.myviewholder>
-{
-    TextView title, date, author, description;
-    ImageView back;
-    private Context context;
-
-    public DashboardAdapter(@NonNull FirebaseRecyclerOptions<Note> options) {
+{    public DashboardAdapter(@NonNull FirebaseRecyclerOptions<Note> options) {
         super(options);
     }
 
@@ -47,9 +43,10 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String ref = String.valueOf(getRef(position).getKey());
                 Intent intent = new Intent(view.getContext(), NewsDetails.class);
-//                intent.putExtra("id", (CharSequence) FirebaseDatabase.getInstance().getReference().child("news")
-//                        .child(getRef(position).getKey()));
+                intent.putExtra("id", ref);
+                Log.e("id reference", ref);
                 view.getContext().startActivity(intent);
             }
         });
@@ -58,7 +55,10 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
         holder.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String ref = String.valueOf(getRef(position).getKey());
                 Intent intent = new Intent(view.getContext(), UpdateActivity.class);
+                intent.putExtra("id", ref);
+                Log.e("id reference", ref);
                 view.getContext().startActivity(intent);
             }
         });
@@ -70,7 +70,6 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
                 AlertDialog.Builder builder = new AlertDialog.Builder(holder.img.getContext());
                 builder.setTitle("Delete");
                 builder.setMessage("Are you sure?");
-
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -82,7 +81,6 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                     }
                 });
                 builder.show();
@@ -95,7 +93,6 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
     public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.dashboard_item,parent,false);
-      //  context = parent.getContext();
         return new myviewholder(view);
     }
 
@@ -108,12 +105,12 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
         {
             super(itemView);
             layout = itemView.findViewById(R.id.main_layout);
-            img = (ImageView) itemView.findViewById(R.id.img);
-            update = (ImageView)itemView.findViewById(R.id.btn_update);
-            delete = (ImageView)itemView.findViewById(R.id.btn_delete);
+            img = itemView.findViewById(R.id.img);
+            update = itemView.findViewById(R.id.btn_update);
+            delete = itemView.findViewById(R.id.btn_delete);
 
-            title = (TextView)itemView.findViewById(R.id.tv_title);
-            date = (TextView)itemView.findViewById(R.id.tv_date);
+            title =itemView.findViewById(R.id.tv_title);
+            date = itemView.findViewById(R.id.tv_date);
         }
     }
 }

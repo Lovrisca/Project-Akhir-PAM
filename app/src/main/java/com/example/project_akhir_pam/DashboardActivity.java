@@ -30,21 +30,24 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         setTitle("Search");
 
-        rc = (RecyclerView) findViewById(R.id.recycle_news);
+        rc = findViewById(R.id.recycle_news);
         rc.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseRecyclerOptions<Note> options =
-                new FirebaseRecyclerOptions.Builder<Note>()
+        FirebaseRecyclerOptions<Note> options = new FirebaseRecyclerOptions.Builder<Note>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("news"), Note.class)
                         .build();
-
-        adapter=new DashboardAdapter(options);
+        adapter = new DashboardAdapter(options);
         rc.setAdapter(adapter);
 
         add = findViewById(R.id.btn_add);
         home = findViewById(R.id.btn_home);
         profile = findViewById(R.id.btn_profile);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
         //to add activity Intent
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +55,6 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),AddActivity.class));
             }
         });
-
         //to profile activity Intent
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,17 +74,10 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -119,6 +114,5 @@ public class DashboardActivity extends AppCompatActivity {
         adapter=new DashboardAdapter(options);
         adapter.startListening();
         rc.setAdapter(adapter);
-
     }
 }

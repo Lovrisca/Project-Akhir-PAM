@@ -25,9 +25,8 @@ import java.util.Locale;
 import java.util.Map;
 
 public class AddActivity extends AppCompatActivity{
-    private EditText title, author, desc;
-    private
-    Button btnSave;
+    private EditText title, desc;
+    private Button btnSave;
     private FirebaseAuth mAuth;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
@@ -39,7 +38,6 @@ public class AddActivity extends AppCompatActivity{
 
         mAuth = FirebaseAuth.getInstance();
         title = findViewById(R.id.add_title);
-        author = findViewById(R.id.add_author);
         desc = findViewById(R.id.add_desc);
         btnSave = findViewById(R.id.btn_save);
         btnSave.setOnClickListener(new View.OnClickListener() {

@@ -34,18 +34,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText email, password, confirmpass, name;
+    private EditText email, password, confirmpass, username;
     private Button btnRegister;
     private TextView loginNow;
     private ImageButton google;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databasereference;
     GoogleSignInClient googleSignInClient;
     int RC_SIGN_IN = 20;
 
@@ -61,10 +63,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         loginNow = findViewById(R.id.login_now);
         google = findViewById(R.id.btn_gmail);
         confirmpass = findViewById(R.id.et_confirmPass);
-        name = findViewById(R.id.et_name);
+        username = findViewById(R.id.et_name);
 
         mAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        databasereference = FirebaseDatabase.getInstance().getReference();
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("116495153438-3egpj0n94bllodj3it0lai0n8h6euf7o.apps.googleusercontent.com")
@@ -87,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_register:
-                signUp(email.getText().toString(), password.getText().toString());
+                signUp(username.getText().toString(), email.getText().toString(), password.getText().toString());
                 break;
             case R.id.login_now:
                 loginNow();
@@ -139,10 +141,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         startActivity(intent);
     }
 
-    public void signUp(String email, String password) {
+    public void signUp(String username, String email, String password) {
         if (!validateForm()) return;
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
+
+                //add realtime db to record username + email
+                databasereference.child("users").push().setValue(mAuth.getUid());
+                databasereference.child("users").child("username").push().setValue(username);
+
                 Log.d(TAG, "createUserWithEmail:success");
                 FirebaseUser user = mAuth.getCurrentUser();
                 updateUI(user);
@@ -157,10 +164,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private boolean validateForm() {
         boolean result = true;
-        if(TextUtils.isEmpty(name.getText().toString())) {
-            name.setError("Required");
+        if(TextUtils.isEmpty(username.getText().toString())) {
+            username.setError("Required");
             result = false;
-        } else name.setError(null);
+        } else username.setError(null);
 
         if (TextUtils.isEmpty(email.getText().toString())) {
             email.setError("Required");

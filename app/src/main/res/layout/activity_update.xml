@@ -67,7 +67,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <EditText
-                android:id="@+id/add_title"
+                android:id="@+id/et_title"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="30dp"
@@ -91,7 +91,7 @@
                 android:textColorHighlight="@color/silver" />
 
             <EditText
-                android:id="@+id/add_desc"
+                android:id="@+id/et_desc"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="10dp"

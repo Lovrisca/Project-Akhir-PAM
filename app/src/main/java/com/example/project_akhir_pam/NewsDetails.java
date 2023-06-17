@@ -1,8 +1,11 @@
 package com.example.project_akhir_pam;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,41 +25,44 @@ public class NewsDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_details);
-//
-//        title = (TextView) findViewById(R.id.tv_title);
-//        author = (TextView) findViewById(R.id.tv_author);
-//        date = (TextView) findViewById(R.id.tv_date);
-//        description = (TextView) findViewById(R.id.tv_details);
-//        back = (ImageView) findViewById(R.id.btn_back);
-//
-//        databaseReference = FirebaseDatabase.getInstance().getReference();
-//
-//        Bundle bundle = getIntent().getExtras();
-//        CharSequence getId = bundle.getCharSequence("id");
-//
-//        DatabaseReference newsRef = databaseReference.child("news").child(getId.toString());
-//        newsRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists()) {
-//                    String authorValue = dataSnapshot.child("author").getValue(String.class);
-//                    String titleValue = dataSnapshot.child("title").getValue(String.class);
-//                    String dateValue = dataSnapshot.child("date").getValue(String.class);
-//                    String descValue = dataSnapshot.child("description").getValue(String.class);
-//
-//                    title.setText(titleValue);
-//                    author.setText(authorValue);
-//                    date.setText(dateValue);
-//                    description.setText(descValue);
-//                } else {
-//                    // The node with the given getId doesn't exist
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                // Handle the error case if the database operation is canceled
-//            }
-//        });
+
+        title = findViewById(R.id.tv_title);
+        author = findViewById(R.id.tv_author);
+        date = findViewById(R.id.tv_date);
+        description = findViewById(R.id.tv_details);
+        back = findViewById(R.id.btn_back);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("news");
+
+        //get selected news id from adapter
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+
+        DatabaseReference newsRef = databaseReference.child(id);
+        newsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Log.e("data di intent read", id);
+                    String authorValue = dataSnapshot.child("author").getValue(String.class);
+                    String titleValue = dataSnapshot.child("title").getValue(String.class);
+                    String dateValue = dataSnapshot.child("date").getValue(String.class);
+                    String descValue = dataSnapshot.child("description").getValue(String.class);
+                    title.setText(titleValue);
+                    author.setText(authorValue);
+                    date.setText(dateValue);
+                    description.setText(descValue);
+                } else {
+                    Toast.makeText(NewsDetails.this, "Not Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(NewsDetails.this, "databse error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void onBackPressed() {
+        finish();
     }
 }
