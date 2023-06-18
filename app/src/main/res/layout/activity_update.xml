@@ -81,7 +81,7 @@
             <EditText
                 android:id="@+id/et_title"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/inriasans_regular"
@@ -105,7 +105,7 @@
             <EditText
                 android:id="@+id/et_desc"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/inriasans_regular"
