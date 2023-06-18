@@ -26,7 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         setTitle("Search");
 
-        rc = (RecyclerView)findViewById(R.id.recycle_news);
+        rc = findViewById(R.id.recycle_news);
         rc.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<Note> options = new FirebaseRecyclerOptions.Builder<Note>()

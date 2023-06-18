@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,6 +48,11 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
     protected void onBindViewHolder(@NonNull final myviewholder holder, final int position, @NonNull Note model) {
         holder.title.setText(model.getTitle());
         holder.date.setText(model.getDate());
+        String imgUri = model.getImage();
+        Log.e("Adapter get img uri", imgUri);
+        if(!imgUri.isEmpty()){
+            Picasso.get().load(imgUri).placeholder(R.drawable.logo).into(holder.img);
+        }
 
         //click layout
         holder.layout.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +182,7 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
                         FirebaseDatabase.getInstance().getReference().child("news")
                                 .child(getRef(position).getKey()).removeValue();
                         Toast.makeText(view.getContext(), "Deleted", Toast.LENGTH_LONG).show();
+                        ((Activity)view.getContext()).finish();
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -17,7 +17,7 @@
 
         <ImageView
             android:id="@+id/img"
-            android:background="@drawable/foto_contoh"
+            android:src="@drawable/logo"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_weight="0"/>
