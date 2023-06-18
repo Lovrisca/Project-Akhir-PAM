@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("116495153438-3egpj0n94bllodj3it0lai0n8h6euf7o.apps.googleusercontent.com")
+                .requestIdToken("1000084332129-78nbcqpqe6ihd57j02cn85k4ai12pn9l.apps.googleusercontent.com")
                 .requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 

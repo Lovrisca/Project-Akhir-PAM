@@ -11,6 +11,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,11 +34,17 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView home, add;
     DatabaseReference databaseReference, databaseReferenceCount;
     FirebaseAuth mAuth;
+    GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("1000084332129-78nbcqpqe6ihd57j02cn85k4ai12pn9l.apps.googleusercontent.com")
+                .requestEmail().build();
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -46,7 +58,16 @@ public class ProfileActivity extends AppCompatActivity {
 
         //get user id
         String userId = String.valueOf(mAuth.getCurrentUser().getUid());
-        Log.e("data profile user:", userId);
+        String emil = String.valueOf(mAuth.getCurrentUser().getEmail());
+        String name = String.valueOf(mAuth.getCurrentUser().getDisplayName());
+        Log.e("email:", emil);
+        Log.e("display name:",name);
+        Log.e("user Id:", userId);
+
+        email.setText(emil);
+        if(!name.isEmpty()){
+            username.setText(name);
+        }
 
         databaseReferenceCount = FirebaseDatabase.getInstance().getReference().child("news");
         databaseReferenceCount.addValueEventListener(new ValueEventListener() {
@@ -57,7 +78,6 @@ public class ProfileActivity extends AppCompatActivity {
                 for(DataSnapshot ds : snapshot.getChildren()){
                     Map<String,Object> map = (Map<String, Object>) ds.getValue();
                     Object name = map.get("author");
-                    //int pValue = Integer.parseInt(String.valueOf(name));
                     if(userId.matches(name.toString())){
                         sum += 1;
                     }
@@ -77,13 +97,9 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String usernameValue = dataSnapshot.child("username").getValue(String.class);
-                    String emailValue = dataSnapshot.child("email").getValue(String.class);
                     String memberValue = dataSnapshot.child("created").getValue(String.class);
-                    //String articleValue = dataSnapshot.child("username").getValue(String.class);
                     username.setText(usernameValue);
-                    email.setText(emailValue);
                     member.setText(memberValue);
-                    //article.setText(articleValue);
                 }
             }
             @Override
@@ -113,7 +129,29 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
     public void logOut() {
-        mAuth.signOut();
+        String name = String.valueOf(mAuth.getCurrentUser().getDisplayName());
+        Log.e("name:", name);
+        if(!name.isEmpty()){
+            googleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Log.e("status", "berhasil logout");
+                    mAuth.signOut();
+                    newTask();
+                }
+            }).addOnFailureListener(this, new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.e("status", "GAGAL LOGOUT");
+                }
+            });
+        }
+        else{
+            mAuth.signOut();
+            newTask();
+        }
+    }
+    public void newTask(){
         Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();

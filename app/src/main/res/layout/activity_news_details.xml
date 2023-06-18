@@ -38,7 +38,7 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/inriasans_regular"
                 android:paddingTop="10dp"
-                android:text="John Doe - KNews"
+                android:text="Author"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -50,7 +50,7 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/inriasans_italic"
                 android:paddingTop="5dp"
-                android:text="28 Mei 2023"
+                android:text="date"
                 android:textColor="@color/silver"
                 android:textSize="15sp" />
 

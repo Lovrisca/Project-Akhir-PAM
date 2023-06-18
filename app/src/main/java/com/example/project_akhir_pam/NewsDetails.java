@@ -34,6 +34,7 @@ public class NewsDetails extends AppCompatActivity {
     DatabaseReference databaseReference, databaseReferenceId;
     StorageReference storageReference;
     ProgressDialog progressDialog;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class NewsDetails extends AppCompatActivity {
         author = findViewById(R.id.tv_author);
         date = findViewById(R.id.tv_date);
         description = findViewById(R.id.tv_details);
+
+        firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("news");
         databaseReferenceId = FirebaseDatabase.getInstance().getReference().child("users");
 
@@ -103,14 +106,15 @@ public class NewsDetails extends AppCompatActivity {
                                                           if (dataSnapshot.exists()) {
                                                               String authorValue = dataSnapshot.child("username").getValue(String.class);
                                                               author.setText(authorValue);
+                                                          }else{
+                                                              String name = String.valueOf(firebaseAuth.getCurrentUser().getDisplayName());
+                                                              author.setText(name);
                                                           }
                                                       }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-                } else {
-                    Toast.makeText(NewsDetails.this, "Not Found", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -120,6 +124,7 @@ public class NewsDetails extends AppCompatActivity {
         });
     }
     public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
         finish();
     }
 }

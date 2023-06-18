@@ -24,125 +24,137 @@
             android:src="@drawable/gambar2" />
     </RelativeLayout>
 
-    <ScrollView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.cardview.widget.CardView
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/rectangle_5"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="30dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/rectangle_5"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/relativeLayout"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="30dp">
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:fontFamily="@font/inriasans_bold"
+                android:text="UPDATE DATA"
+                android:textAlignment="center"
+                android:textColor="@color/black1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="24dp" />
 
-                <TextView
-                    android:id="@+id/loginText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inriasans_bold"
-                    android:text="UPDATE DATA"
-                    android:textAlignment="center"
-                    android:textColor="@color/black1"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/upload_image"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:onClick="uploadImage"
+                android:src="@drawable/image_upload"
+                app:layout_constraintBottom_toTopOf="@+id/tv_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-                <ImageButton
-                    android:id="@+id/upload_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="40dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/image_upload"
-                    tools:ignore="SpeakableTextPresentCheck" />
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inriasans_regular"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Title"
+                android:textColor="@color/black1"
+                android:textColorHighlight="@color/silver"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/et_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteX="24dp" />
 
             <EditText
                 android:id="@+id/et_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inriasans_regular"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:padding="8dp"
+                android:textColor="@color/black1"
+                android:textColorHighlight="@color/silver"
+                app:layout_constraintBottom_toTopOf="@+id/tv_desc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteX="24dp" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/inriasans_regular"
                 android:gravity="center"
-                android:hint="Old Title"
                 android:padding="8dp"
+                android:text="Description"
                 android:textColor="@color/black1"
-                android:textColorHighlight="@color/silver" />
-
-                <EditText
-                    android:id="@+id/et_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="4dp"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="@font/inriasans_regular"
-                    android:gravity="center"
-                    android:hint="Old Title"
-                    android:padding="8dp"
-                    android:textColor="@color/black1"
-                    android:textColorHighlight="@color/silver" />
+                android:textColorHighlight="@color/silver"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/et_desc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteX="24dp" />
 
             <EditText
                 android:id="@+id/et_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/inriasans_regular"
-                android:gravity="center"
-                android:hint="Old Description"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:lines="8"
                 android:padding="8dp"
                 android:textColor="@color/black1"
-                android:textColorHighlight="@color/silver" />
+                android:textColorHighlight="@color/silver"
+                app:layout_constraintBottom_toTopOf="@+id/btn_save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteX="24dp" />
 
-                <EditText
-                    android:id="@+id/et_desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="@font/inriasans_regular"
-                    android:gravity="center"
-                    android:hint="Old Description"
-                    android:padding="8dp"
-                    android:textColor="@color/black1"
-                    android:textColorHighlight="@color/silver" />
-
-                <Button
-                    android:id="@+id/btn_save"
-                    android:layout_width="220dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/bg_button"
-                    android:fontFamily="@font/inriasans_bold"
-                    android:text="SAVE"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </ScrollView>
-
-
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="220dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_button"
+                android:fontFamily="@font/inriasans_bold"
+                android:text="SAVE"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,8 +53,8 @@ public class AddActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("news");
         mAuth = FirebaseAuth.getInstance();
-        title = findViewById(R.id.add_title);
-        desc = findViewById(R.id.add_desc);
+        title = findViewById(R.id.et_title);
+        desc = findViewById(R.id.et_desc);
         btnSave = findViewById(R.id.btn_save);
         image = findViewById(R.id.upload_image);
 

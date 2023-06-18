@@ -156,7 +156,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 //add realtime db to record username + email
                 Map<String, Object> details = new HashMap<>();
                 details.put("username", username);
-                details.put("email", email);
                 details.put("created", getCurrentDate());
                 databasereference.child("users").child(mAuth.getUid()).setValue(details);
 
