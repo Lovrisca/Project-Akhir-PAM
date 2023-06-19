@@ -181,7 +181,7 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
                     public void onClick(DialogInterface dialogInterface, int i) {
                         FirebaseDatabase.getInstance().getReference().child("news")
                                 .child(getRef(position).getKey()).removeValue();
-                        Toast.makeText(view.getContext(), "Deleted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
                         ((Activity)view.getContext()).finish();
                     }
                 });
@@ -222,7 +222,7 @@ public class DashboardAdapter extends FirebaseRecyclerAdapter<Note,DashboardAdap
 
     //helper
     public static String getCurrentDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm", Locale.getDefault());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MMMM/yyyy hh:mm", Locale.getDefault());
         Date date = new Date();
         return dateFormat.format(date);
     }

@@ -77,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
                 int sum = 0;
                 for(DataSnapshot ds : snapshot.getChildren()){
                     Map<String,Object> map = (Map<String, Object>) ds.getValue();
-                    Object name = map.get("author");
+                    Object name = map.get("authorId");
                     if(userId.matches(name.toString())){
                         sum += 1;
                     }

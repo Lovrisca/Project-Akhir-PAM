@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,60 +63,43 @@ public class NewsDetails extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        storageReference = FirebaseStorage.getInstance().getReference("images/"+id);
-        try {
-            File local = File.createTempFile("tempfile", ".jpg");
-            storageReference.getFile(local).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(local.getAbsolutePath());
-                    image.setImageBitmap(bitmap);
-                    progressDialog.dismiss();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    progressDialog.dismiss();
-                    Toast.makeText(NewsDetails.this, "No image found", Toast.LENGTH_SHORT).show();
-                    Log.e("status download image","gagal");
-
-                }
-            });
-        }catch (IOException e){
-        }
-
         DatabaseReference newsRef = databaseReference.child(id);
         newsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Log.e("id news", id);
-                    String getId = dataSnapshot.child("author").getValue(String.class);
+                    String nameValue = dataSnapshot.child("authorName").getValue(String.class);
                     String titleValue = dataSnapshot.child("title").getValue(String.class);
                     String dateValue = dataSnapshot.child("date").getValue(String.class);
                     String descValue = dataSnapshot.child("description").getValue(String.class);
+                    String imageValue = dataSnapshot.child("imageName").getValue(String.class);
+
                     title.setText(titleValue);
+                    author.setText(nameValue);
                     date.setText(dateValue);
                     description.setText(descValue);
+                    //put image in news details
+                    storageReference = FirebaseStorage.getInstance().getReference("images/"+imageValue);
+                    try {
+                        File local = File.createTempFile("tempfile", ".jpg");
+                        storageReference.getFile(local).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                Bitmap bitmap = BitmapFactory.decodeFile(local.getAbsolutePath());
+                                image.setImageBitmap(bitmap);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
+                                Log.e("status download image","gagal");
 
-                    //get username from author uid
-                    DatabaseReference authorId = databaseReferenceId.child(getId);
-                    Log.e("Id author", getId);
-                    authorId.addValueEventListener(new ValueEventListener() {
-                                                      @Override
-                                                      public void onDataChange(DataSnapshot dataSnapshot) {
-                                                          if (dataSnapshot.exists()) {
-                                                              String authorValue = dataSnapshot.child("username").getValue(String.class);
-                                                              author.setText(authorValue);
-                                                          }else{
-                                                              String name = String.valueOf(firebaseAuth.getCurrentUser().getDisplayName());
-                                                              author.setText(name);
-                                                          }
-                                                      }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
+                            }
+                        });
+                    }catch (IOException e){
+                    }
+                    progressDialog.dismiss();
                 }
             }
             @Override

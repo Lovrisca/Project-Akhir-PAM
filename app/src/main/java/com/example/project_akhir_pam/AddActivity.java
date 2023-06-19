@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,13 +22,15 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class AddActivity extends AppCompatActivity {
     Button btnSave;
     FirebaseAuth mAuth;
     Uri imageUri;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference, databaseReferenceId;
     StorageReference storageReference;
     ProgressDialog progressDialog;
 
@@ -52,6 +53,7 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("news");
+        databaseReferenceId = FirebaseDatabase.getInstance().getReference().child("users");
         mAuth = FirebaseAuth.getInstance();
         title = findViewById(R.id.et_title);
         desc = findViewById(R.id.et_desc);
@@ -80,26 +82,74 @@ public class AddActivity extends AppCompatActivity {
         if (!validateFormAdd()) {
             return;
         }
+
+        // Input to database
         Map<String, Object> map = new HashMap<>();
         DatabaseReference uniqueNewsId = databaseReference.push();
         String newsId = uniqueNewsId.getKey();
-        map.put("image", "");
-        map.put("title", title.getText().toString());
-        map.put("author", mAuth.getUid());
-        map.put("description", desc.getText().toString());
-        map.put("date", getCurrentDate());
 
-        uniqueNewsId.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                uploadImage(newsId);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Could not insert", Toast.LENGTH_LONG).show();
-            }
-        });
+        String userId = String.valueOf(mAuth.getCurrentUser().getUid());
+        DatabaseReference ref = databaseReferenceId.child(userId);
+
+        String authorName = String.valueOf(mAuth.getCurrentUser().getDisplayName());
+        Log.e("isi authorName", authorName);
+
+        //if login using email
+        if (authorName.isEmpty() || authorName.equals("null")) {
+            Log.e("User Id in IF", userId);
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String username = dataSnapshot.child("username").getValue(String.class);
+                        map.put("authorName", username);
+                        map.put("authorId", userId);
+                        map.put("image", userId);
+                        map.put("title", title.getText().toString());
+                        map.put("description", desc.getText().toString());
+                        map.put("date", getCurrentDate());
+                        // Save the data to Firebase Realtime Database
+                        uniqueNewsId.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                uploadImage(newsId);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Could not insert", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
+        //if login using google
+        else {
+            Log.e("User Id in ELSE", userId);
+            map.put("authorName", authorName);
+            map.put("authorId", userId);
+            map.put("image", userId);
+            map.put("title", title.getText().toString());
+            map.put("description", desc.getText().toString());
+            map.put("date", getCurrentDate());
+
+            // Save the data to Firebase Realtime Database
+            uniqueNewsId.setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    uploadImage(newsId);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Could not insert", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     public void onBackPressed() {
@@ -141,7 +191,11 @@ public class AddActivity extends AppCompatActivity {
     }
     private void uploadImage(String newsId) {
         //memberi nama file
-        storageReference = FirebaseStorage.getInstance().getReference("images/" + newsId);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
+        Date now = new Date();
+        String filename = formatter.format(now);
+
+        storageReference = FirebaseStorage.getInstance().getReference("images/" + filename);
         Log.e("Image path", String.valueOf(imageUri));
         if (imageUri != null) {
             storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -153,11 +207,12 @@ public class AddActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Uri> task) {
                             String imgUri = task.getResult().toString();
                                 Log.e("image Uri", imgUri);
-                            progressDialog.dismiss();
                             Map<String, Object> p = new HashMap<>();
                             p.put("image",imgUri);
+                            p.put("imageName",filename);
                             databaseReference.child(newsId).updateChildren(p);
-                            Toast.makeText(getApplicationContext(), "Upload success!", Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Upload success!", Toast.LENGTH_SHORT).show();
                                 Log.e("status upload:", "berhasil");
                             finish();
                         }
